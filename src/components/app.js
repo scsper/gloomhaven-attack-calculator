@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import Enemies from './enemies'
-import AbilityDecks from './ability-decks'
+import Enemies from '../enemies'
+import AbilityDecks from '../decks/ability'
 
 class App extends Component {
   renderEnemy (enemy, levelId, card) {
@@ -9,7 +8,8 @@ class App extends Component {
 
     return (
       <div>
-        <h2>Living Bones</h2>
+        <h1>Enemies</h1>
+        <h2>{enemy.name}</h2>
         <p>Health: {level.health}</p>
         <p>Movement: {level.movement + card.movement}</p>
         <p>Attack: {level.attack + card.attack}</p>
@@ -20,10 +20,11 @@ class App extends Component {
     )
   }
 
-  renderAbilityCard (card) {
+  renderAbilityCard (enemy, card) {
     return (
       <div>
-        <h2>Living Bones</h2>
+        <h1>Ability Cards</h1>
+        <h2>{enemy.name}</h2>
         <h3>Initiative: {card.initiative}</h3>
         <p>Movement: {card.movement}</p>
         <p>Attack: {card.attack}</p>
@@ -37,12 +38,13 @@ class App extends Component {
 
   render() {
     const deck = new AbilityDecks.LivingBones()
+    const enemy = new Enemies.LivingBones()
     const card = deck.draw()
 
     return (
       <div className="app">
-        {this.renderEnemy(new Enemies.LivingBones(), 1, card)}
-        {this.renderAbilityCard(card)}
+        {this.renderEnemy(enemy, 1, card)}
+        {this.renderAbilityCard(enemy, card)}
       </div>
     );
   }
