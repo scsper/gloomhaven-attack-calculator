@@ -1,11 +1,13 @@
 import Enemy from './enemy'
 import Level from './level';
+import { LivingBones as LivingBonesDeck } from '../decks/ability'
 
 export default class LivingBones extends Enemy {
   constructor () {
     super()
 
     this.name = 'Living Bones'
+    this.deck = new LivingBonesDeck()
 
     this.addLevel(0, new Level(5, 2, 1, 0, { target: 2 }))
     this.addLevel(1, new Level(5, 3, 1, 0, { target: 2, shield: 1 }))

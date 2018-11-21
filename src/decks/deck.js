@@ -16,10 +16,14 @@ export default class Deck {
     }
 
     return this.cards
-
   }
 
   draw () {
+    this.index++
+    return this.cards[this.index]
+  }
+
+  peek () {
     return this.cards[this.index]
   }
 }

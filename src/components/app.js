@@ -1,53 +1,60 @@
 import React, { Component } from 'react';
 import Enemies from '../enemies'
-import AbilityDecks from '../decks/ability'
+import Enemy from './enemy'
+import AttackModifierDeck from './attack-modifier-deck'
+import EnemyAttackModifierDeck from '../decks/enemy-attack-modifier'
 
 class App extends Component {
-  renderEnemy (enemy, levelId, card) {
-    const level = enemy.getLevel(levelId)
+  constructor () {
+    super()
 
-    return (
-      <div>
-        <h1>Enemies</h1>
-        <h2>{enemy.name}</h2>
-        <p>Health: {level.health}</p>
-        <p>Movement: {level.movement + card.movement}</p>
-        <p>Attack: {level.attack + card.attack}</p>
-        <p>Range: {level.range}</p>
-        <p>Target: {level.target}</p>
-        <p>Shield: {level.shield}</p>
-      </div>
-    )
+    this.state = initializeState()
   }
 
-  renderAbilityCard (enemy, card) {
-    return (
-      <div>
-        <h1>Ability Cards</h1>
-        <h2>{enemy.name}</h2>
-        <h3>Initiative: {card.initiative}</h3>
-        <p>Movement: {card.movement}</p>
-        <p>Attack: {card.attack}</p>
-        <p>Heal: {card.heal}</p>
-        <p>Shield: {card.shield}</p>
-        <p>Reshuffle: {card.reshuffle}</p>
-        <p>Description: {card.descriptors}</p>
-      </div>
-    )
+  endTurn = () => {
+    this.state.enemyAttackModifierDeck.draw()
+
+    this.setState({
+      enemyTurn: Math.min(this.state.enemyTurn + 1, this.state.enemies.length - 1)
+    })
+  }
+
+  endRound = () => {
+    this.setState({
+      roundCount: this.state.roundCount + 1
+    })
+  }
+
+  renderEnemies () {
+    return this.state.enemies.map((enemy) => <Enemy key={enemy.name} enemy={enemy} />)
   }
 
   render() {
-    const deck = new AbilityDecks.LivingBones()
-    const enemy = new Enemies.LivingBones()
-    const card = deck.draw()
-
     return (
       <div className="app">
-        {this.renderEnemy(enemy, 1, card)}
-        {this.renderAbilityCard(enemy, card)}
+        {this.renderEnemies()}
+        <AttackModifierDeck deck={this.state.enemyAttackModifierDeck} onDraw={this.endTurn} />
       </div>
     );
   }
 }
 
 export default App;
+
+function initializeState () {
+  const enemyLevel = 1
+  const enemies = [new Enemies.LivingBones()]
+  const enemyAttackModifierDeck = new EnemyAttackModifierDeck()
+  const enemyTurn = 0
+  const roundCount = 0
+
+  enemies.forEach(enemy => enemy.setLevel(1))
+
+  return {
+    enemyLevel,
+    enemies,
+    enemyAttackModifierDeck,
+    enemyTurn,
+    roundCount
+  }
+}

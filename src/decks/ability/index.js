@@ -1,5 +1,5 @@
 import LivingBones from './living-bones'
 
-export default {
+export {
   LivingBones
 }
