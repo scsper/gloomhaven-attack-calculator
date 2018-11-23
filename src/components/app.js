@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Enemy from './enemy'
 import AttackModifierDeck from './attack-modifier-deck'
+import EnemySelector from './enemy-selector'
 
 class App extends Component {
   constructor() {
@@ -22,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <EnemySelector />
         {/* {this.renderEnemies()} */}
         <AttackModifierDeck />
       </div>
