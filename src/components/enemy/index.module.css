@@ -1,7 +1,11 @@
 .enemy {
-
 }
 
 .container {
   display: flex;
+}
+
+.nameContainer {
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,0 +1,21 @@
+{
+  "monsters": {
+    "Living Bones": [
+      { "initiative": 12, "reshuffle": true, "attributes": ["Shield 1", "Heal 2 Self"] },
+      { "initiative": 20, "reshuffle": true, "move": -2, "attack": 0, "attributes": ["Heal 2 Self"] },
+      { "initiative": 25, "reshuffle": false, "move": 0, "attack": -1 },
+      { "initiative": 45, "reshuffle": false, "move": 0, "attack": 0 },
+      { "initiative": 45, "reshuffle": false, "move": 0, "attack": 0 },
+      { "initiative": 64, "reshuffle": false, "move": -1, "attack": 1 },
+      {
+        "initiative": 74,
+        "reshuffle": false,
+        "move": 0,
+        "attack": 0,
+        "attributes": ["Target one enemy with all attacks"]
+      },
+      { "initiative": 81, "reshuffle": false, "attack": 2 }
+    ]
+  },
+  "bosses": {}
+}

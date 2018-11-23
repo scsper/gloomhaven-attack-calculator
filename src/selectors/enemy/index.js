@@ -8,3 +8,7 @@ export function getTopCard(state) {
 export function getLevel(state) {
   return state.enemy.level
 }
+
+export function getActiveEnemies(state) {
+  return state.enemy.activeEnemies
+}

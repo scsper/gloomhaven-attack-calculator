@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import AbilityCard from './ability-card'
 import styles from './index.module.css'
@@ -8,38 +9,40 @@ class Enemy extends React.Component {
     enemy: PropTypes.object.isRequired
   }
 
-  renderStats () {
+  renderStats() {
     const { enemy } = this.props
-    const baseStats = enemy.getBaseStats()
-    const card = enemy.deck.peek()
 
     return (
       <div>
-        <h2>Stats</h2>
-        <p>Health: {baseStats.health}</p>
-        <p>Movement: {baseStats.movement + card.movement}</p>
-        <p>Attack: {baseStats.attack + card.attack}</p>
-        <p>Range: {baseStats.range}</p>
-        <p>Target: {baseStats.target}</p>
-        <p>Shield: {baseStats.shield}</p>
+        <h3>Stats</h3>
+        <p>Health: {enemy.health}</p>
+        <p>Movement: {enemy.move}</p>
+        <p>Attack: {enemy.attack}</p>
+        <p>Range: {enemy.range}</p>
+        <p>Attributes: {enemy.attributes}</p>
       </div>
     )
   }
 
-  render () {
+  render() {
     const { enemy } = this.props
-    const card = enemy.deck.peek()
 
     return (
       <div className={styles.enemy}>
-        <h1>{enemy.name}</h1>
+        <div className={styles.nameContainer}>
+          <h1>{enemy.name}</h1>
+          <button>x</button>
+        </div>
         <div className={styles.container}>
           {this.renderStats()}
-          <AbilityCard card={card} />
+          {/* <AbilityCard card={card} /> */}
         </div>
       </div>
     )
   }
 }
 
-export default Enemy
+export default connect(
+  () => ({}),
+  {}
+)(Enemy)

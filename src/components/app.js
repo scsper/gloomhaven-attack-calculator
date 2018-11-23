@@ -1,30 +1,16 @@
 import React, { Component } from 'react'
-import Enemy from './enemy'
 import AttackModifierDeck from './attack-modifier-deck'
 import EnemySelector from './enemy-selector'
+import ActiveEnemies from './active-enemies'
+
+import styles from './app.module.css'
 
 class App extends Component {
-  constructor() {
-    super()
-
-    this.state = initializeState()
-  }
-
-  endRound = () => {
-    this.setState({
-      roundCount: this.state.roundCount + 1
-    })
-  }
-
-  renderEnemies() {
-    // return this.state.enemies.map(enemy => <Enemy key={enemy.name} enemy={enemy} />)
-  }
-
   render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <EnemySelector />
-        {/* {this.renderEnemies()} */}
+        <ActiveEnemies />
         <AttackModifierDeck />
       </div>
     )
@@ -32,8 +18,3 @@ class App extends Component {
 }
 
 export default App
-
-function initializeState() {
-  // const enemies = [new Enemies.LivingBones()]
-  // enemies.forEach(enemy => enemy.setLevel(1))
-}
