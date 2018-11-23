@@ -12,3 +12,7 @@ export function getLevel(state) {
 export function getActiveEnemies(state) {
   return state.enemy.activeEnemies
 }
+
+export function getEnemy(state, enemyName) {
+  return state.enemy.enemies[enemyName]
+}

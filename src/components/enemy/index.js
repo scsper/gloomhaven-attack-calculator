@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import AbilityCard from './ability-card'
 import styles from './index.module.css'
+import { enemyRemovedFromGame } from '../../actions/enemy-removed-from-game'
+import { getEnemyAbilityCards } from '../../enemies'
+import { getEnemy } from '../../selectors/enemy'
 
 class Enemy extends React.Component {
   static propTypes = {
@@ -24,6 +27,10 @@ class Enemy extends React.Component {
     )
   }
 
+  onRemove = () => {
+    this.props.enemyRemovedFromGame(this.props.enemy.name)
+  }
+
   render() {
     const { enemy } = this.props
 
@@ -31,7 +38,7 @@ class Enemy extends React.Component {
       <div className={styles.enemy}>
         <div className={styles.nameContainer}>
           <h1>{enemy.name}</h1>
-          <button>x</button>
+          <button onClick={this.onRemove}>x</button>
         </div>
         <div className={styles.container}>
           {this.renderStats()}
@@ -42,7 +49,12 @@ class Enemy extends React.Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    enemy: getEnemy(state, ownProps.enemyName)
+  }
+}
 export default connect(
-  () => ({}),
-  {}
+  mapStateToProps,
+  { enemyRemovedFromGame }
 )(Enemy)

@@ -10,7 +10,7 @@ class ActiveEnemies extends React.Component {
   }
 
   renderEnemies() {
-    return this.props.activeEnemies.map(enemy => <Enemy key={enemy.name} enemy={enemy} />)
+    return this.props.activeEnemies.map(enemyName => <Enemy key={enemyName} enemyName={enemyName} />)
   }
 
   render() {
