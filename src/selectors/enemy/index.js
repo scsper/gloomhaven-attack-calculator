@@ -4,3 +4,7 @@ export function getTopCard(state) {
 
   return attackModifierDeck.cards[attackModifierDeck.index]
 }
+
+export function getLevel(state) {
+  return state.enemy.level
+}

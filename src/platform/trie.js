@@ -1,3 +1,5 @@
+import capitalizeEachWord from './capitalize-each-word'
+
 export default class Trie {
   constructor(wordList) {
     this.trie = new TrieNode()
@@ -36,6 +38,11 @@ export default class Trie {
 
   _getSubtree(inputStr) {
     let str = inputStr.toLowerCase()
+
+    if (!str) {
+      return
+    }
+
     let node = this.trie
 
     for (let i = 0; i < str.length; i++) {
@@ -85,6 +92,24 @@ export default class Trie {
     })
 
     return allPossibleWords
+  }
+
+  /**
+   * This is a hack for this project.
+   *
+   * Ideally, for a more generic trie, the trie would keep track of which letters are capitalized versus which
+   * characters are not capitalized.  However, for this app's usage, the first character of each word in the trie
+   * will always be capitalized because they are the IDs of the enemies, and that is the format that the data uses.
+   * I also don't really want this in the components because it is returning an ID.  Returning a malformatted ID sounds
+   * like a recipe for a tricky bug in the future.
+   *
+   * Because it's a hack, it's separated into its own function so that it doesn't ruin the tests.
+   *
+   * I'm not planning on using this trie elsewhere in the app, nor am I planning to make this trie more generic,
+   * so I'm okay with taking this shortcut for now.  Maybe I'll change my mind in the future :)
+   */
+  getAllPossibleWordsWithCapitals(inputStr) {
+    return this.getAllPossibleWords(inputStr).map(capitalizeEachWord)
   }
 }
 

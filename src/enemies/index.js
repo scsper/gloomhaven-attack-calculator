@@ -5,9 +5,9 @@ const enemyList = [...Object.keys(enemyStats.monsters), ...Object.keys(enemyStat
 
 export function getEnemyData(name, level, type = EnemyTypes.NORMAL) {
   if (enemyStats.monsters.hasOwnProperty(name)) {
-    return enemyStats.monsters[name][level][type]
+    return enemyStats.monsters[name].level[level][type]
   } else if (enemyStats.bosses.hasOwnProperty(name)) {
-    return enemyStats.bosses[name][level][type]
+    return enemyStats.bosses[name].level[level][type]
   } else {
     throw new Error(`Unable to find enemy ${name} listed in the enemy stats.`)
   }

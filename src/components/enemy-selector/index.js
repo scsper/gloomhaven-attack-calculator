@@ -1,22 +1,66 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { getEnemyList } from '../../enemies'
+import Trie from '../../platform/trie'
+import { enemyAddedToGame } from '../../actions/enemy-added-to-game'
+import { EnemyTypes } from '../../consts'
 
 class EnemySelector extends React.Component {
-  renderList() {
-    const enemyList = getEnemyList()
+  constructor() {
+    super()
+    this.trie = new Trie(getEnemyList())
+    this.state = {
+      value: ''
+    }
+  }
 
-    return enemyList.map(enemy => <li key={enemy}>{enemy}</li>)
+  onChange = e => {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
+  onClick = e => {
+    this.props.enemyAddedToGame()
+  }
+
+  renderEnemyNames(enemyNames) {
+    return enemyNames.map(enemyName => (
+      <EnemyName key={enemyName} enemyName={enemyName} onClick={this.props.enemyAddedToGame} />
+    ))
   }
 
   render() {
+    const enemyNames = this.trie.getAllPossibleWordsWithCapitals(this.state.value)
+
     return (
       <div>
         <h1>Enemy Selector</h1>
-        <input placeholder="Search for an enemy..." />
-        <ul>{this.renderList()}</ul>
+        <input placeholder="Search for an enemy..." onChange={this.onChange} value={this.state.value} />
+        <ul>{this.renderEnemyNames(enemyNames)}</ul>
       </div>
     )
   }
 }
 
-export default EnemySelector
+class EnemyName extends React.Component {
+  static propTypes = {
+    enemyName: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
+  }
+
+  onClick = () => {
+    // TODO: Add handling for Elite enemies
+    this.props.onClick(this.props.enemyName, EnemyTypes.NORMAL)
+  }
+
+  render() {
+    return <li onClick={this.onClick}>{this.props.enemyName}</li>
+  }
+}
+
+export default connect(
+  () => ({}),
+  { enemyAddedToGame }
+)(EnemySelector)

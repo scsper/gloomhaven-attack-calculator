@@ -176,5 +176,13 @@ describe('./platform/trie', () => {
 
       expect(allPossibleWords).toEqual([])
     })
+
+    it('returns an empty array for an empty string', () => {
+      const wordList = ['dog', 'don']
+      const trie = new Trie(wordList)
+      const allPossibleWords = trie.getAllPossibleWords('')
+
+      expect(allPossibleWords).toEqual([])
+    })
   })
 })

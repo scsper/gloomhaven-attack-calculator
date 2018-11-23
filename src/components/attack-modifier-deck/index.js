@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getTopCard } from '../../selectors/enemy/attack-modifier-deck'
+import { getTopCard } from '../../selectors/enemy'
 import { endTurn } from '../../actions/end-turn'
 import { AttackModifierTypes } from '../../consts'
 
