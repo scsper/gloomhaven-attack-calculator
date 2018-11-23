@@ -16,3 +16,9 @@ export function getActiveEnemies(state) {
 export function getEnemy(state, enemyName) {
   return state.enemy.enemies[enemyName]
 }
+
+export function getAbilityCard(state, enemyName) {
+  const deck = state.enemy.enemies[enemyName].deck
+
+  return deck.cards[deck.index]
+}

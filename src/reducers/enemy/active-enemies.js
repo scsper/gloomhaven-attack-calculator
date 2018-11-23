@@ -3,6 +3,12 @@ import { ENEMY_ADDED_TO_GAME, ENEMY_REMOVED_FROM_GAME } from '../../consts/actio
 export default function activeEnemies(state = [], action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+      const found = state.some(enemyName => enemyName === action.enemyName)
+
+      if (found) {
+        return state
+      }
+
       return state.concat(action.enemyName)
     case ENEMY_REMOVED_FROM_GAME:
       const newState = []

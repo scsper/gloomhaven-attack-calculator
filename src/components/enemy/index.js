@@ -4,12 +4,15 @@ import PropTypes from 'prop-types'
 import AbilityCard from './ability-card'
 import styles from './index.module.css'
 import { enemyRemovedFromGame } from '../../actions/enemy-removed-from-game'
-import { getEnemyAbilityCards } from '../../enemies'
-import { getEnemy } from '../../selectors/enemy'
+import { getEnemy, getAbilityCard } from '../../selectors/enemy'
 
 class Enemy extends React.Component {
   static propTypes = {
     enemy: PropTypes.object.isRequired
+  }
+
+  onRemove = () => {
+    this.props.enemyRemovedFromGame(this.props.enemy.name)
   }
 
   renderStats() {
@@ -27,10 +30,6 @@ class Enemy extends React.Component {
     )
   }
 
-  onRemove = () => {
-    this.props.enemyRemovedFromGame(this.props.enemy.name)
-  }
-
   render() {
     const { enemy } = this.props
 
@@ -42,7 +41,7 @@ class Enemy extends React.Component {
         </div>
         <div className={styles.container}>
           {this.renderStats()}
-          {/* <AbilityCard card={card} /> */}
+          <AbilityCard card={this.props.abilityCard} />
         </div>
       </div>
     )
@@ -51,7 +50,8 @@ class Enemy extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    enemy: getEnemy(state, ownProps.enemyName)
+    enemy: getEnemy(state, ownProps.enemyName),
+    abilityCard: getAbilityCard(state, ownProps.enemyName)
   }
 }
 export default connect(

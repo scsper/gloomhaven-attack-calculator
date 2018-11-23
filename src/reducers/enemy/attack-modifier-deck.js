@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import shuffle from '../../utils/shuffle'
 import { AttackModifierTypes } from '../../consts'
 
-const initialCards = [
+const initialCards = shuffle([
   { attack: 0, type: AttackModifierTypes.ATTACK },
   { attack: 0, type: AttackModifierTypes.ATTACK },
   { attack: 0, type: AttackModifierTypes.ATTACK },
@@ -24,7 +24,7 @@ const initialCards = [
   { attack: -2, type: AttackModifierTypes.ATTACK },
   { attack: 0, type: AttackModifierTypes.NULL },
   { attack: 0, type: AttackModifierTypes.DOUBLE_DAMAGE }
-]
+])
 
 export default combineReducers({
   index,

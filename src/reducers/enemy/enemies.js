@@ -1,4 +1,4 @@
-import { ENEMY_ADDED_TO_GAME } from '../../consts/actions'
+import { ENEMY_ADDED_TO_GAME, ROUND_ENDED } from '../../consts/actions'
 import { combineReducers } from 'redux'
 import { getEnemyData, getEnemyAbilityCards } from '../../enemies'
 import shuffle from '../../utils/shuffle'
@@ -11,8 +11,7 @@ const enemy = combineReducers({
   attack,
   range,
   attributes,
-  cards,
-  index
+  deck
 })
 
 export default function enemies(state = {}, action) {
@@ -26,6 +25,15 @@ export default function enemies(state = {}, action) {
         ...state,
         [action.enemyName]: enemy({}, action)
       }
+
+    case ROUND_ENDED:
+      const newState = {}
+
+      Object.keys(state).forEach(enemyName => {
+        newState[enemyName] = enemy(state[enemyName], { ...action, enemyName })
+      })
+
+      return newState
     default:
       return state
   }
@@ -94,17 +102,30 @@ function attributes(state = [], action) {
   }
 }
 
-function cards(state = [], action) {
+function deck(state = { cards: [], index: 0 }, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
-      return shuffle(getEnemyAbilityCards(action.enemyName))
-    default:
-      return state
-  }
-}
+      return {
+        cards: shuffle(getEnemyAbilityCards(action.enemyName)),
+        index: state.index || 0
+      }
 
-function index(state = 0, action) {
-  switch (action.type) {
+    case ROUND_ENDED: {
+      const reshuffle = state.cards[state.index].reshuffle
+
+      if (reshuffle) {
+        return {
+          cards: shuffle(getEnemyAbilityCards(action.enemyName)),
+          index: 0
+        }
+      }
+
+      return {
+        cards: state.cards,
+        index: state.index + 1
+      }
+    }
+
     default:
       return state
   }

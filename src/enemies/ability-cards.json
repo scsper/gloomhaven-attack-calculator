@@ -1,9 +1,19 @@
 {
   "monsters": {
+    "Boss": [
+      { "initiative": 11, "reshuffle": false, "attributes": ["Special 2"] },
+      { "initiative": 14, "reshuffle": false, "attributes": ["Special 2"] },
+      { "initiative": 17, "reshuffle": true, "attributes": ["Special 2"] },
+      { "initiative": 36, "reshuffle": false, "move": 0, "attack": 0 },
+      { "initiative": 52, "reshuffle": false, "move": -1, "attack": -1, "attributes": ["Range 3", "Target 2"] },
+      { "initiative": 73, "reshuffle": false, "attributes": ["Special 1"] },
+      { "initiative": 79, "reshuffle": false, "attributes": ["Special 1"] },
+      { "initiative": 85, "reshuffle": true, "attributes": ["Special 1"] }
+    ],
     "Living Bones": [
       { "initiative": 12, "reshuffle": true, "attributes": ["Shield 1", "Heal 2 Self"] },
       { "initiative": 20, "reshuffle": true, "move": -2, "attack": 0, "attributes": ["Heal 2 Self"] },
-      { "initiative": 25, "reshuffle": false, "move": 0, "attack": -1 },
+      { "initiative": 25, "reshuffle": false, "move": 1, "attack": -1 },
       { "initiative": 45, "reshuffle": false, "move": 0, "attack": 0 },
       { "initiative": 45, "reshuffle": false, "move": 0, "attack": 0 },
       { "initiative": 64, "reshuffle": false, "move": -1, "attack": 1 },
@@ -15,7 +25,32 @@
         "attributes": ["Target one enemy with all attacks"]
       },
       { "initiative": 81, "reshuffle": false, "attack": 2 }
+    ],
+    "Living Corpse": [
+      {
+        "initiative": 21,
+        "reshuffle": false,
+        "move": 1,
+        "attributes": ["Muddle", "Immobilize", "Target one adjacent enemy"]
+      },
+      {
+        "initiative": 32,
+        "reshuffle": false,
+        "attack": 2,
+        "attributes": ["Push 1", "Living Corpse suffers 1 damage."]
+      },
+      { "initiative": 47, "reshuffle": false, "move": 1, "attack": -1 },
+      { "initiative": 66, "reshuffle": true, "move": 0, "attack": 0 },
+      { "initiative": 66, "reshuffle": true, "move": 0, "attack": 0 },
+      {
+        "initiative": 71,
+        "reshuffle": true,
+        "move": 0,
+        "attack": 1,
+        "attributes": ["Poison", "Target all adjacent enemies"]
+      },
+      { "initiative": 82, "reshuffle": false, "move": -1, "attack": 1 },
+      { "initiative": 91, "reshuffle": false, "move": 1, "attributes": ["Living Corpse suffers 1 damage."] }
     ]
-  },
-  "bosses": {}
+  }
 }

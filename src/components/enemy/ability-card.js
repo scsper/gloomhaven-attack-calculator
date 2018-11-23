@@ -6,18 +6,16 @@ class AbilityCard extends Component {
     card: PropTypes.object.isRequired
   }
 
-  render () {
+  render() {
     const { card } = this.props
     return (
       <div>
         <h2>Ability Card</h2>
         <h3>Initiative: {card.initiative}</h3>
-        <p>Movement: {card.movement}</p>
+        <p>Movement: {card.move}</p>
         <p>Attack: {card.attack}</p>
-        <p>Heal: {card.heal}</p>
-        <p>Shield: {card.shield}</p>
+        <p>Attributes: {card.attributes}</p>
         <p>Reshuffle: {card.reshuffle}</p>
-        <p>Description: {card.descriptors}</p>
       </div>
     )
   }

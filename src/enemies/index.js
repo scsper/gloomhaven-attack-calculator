@@ -24,6 +24,6 @@ export function getEnemyAbilityCards(name) {
   } else if (enemyAbilityCards.bosses[name]) {
     return enemyAbilityCards.bosses[name]
   } else {
-    throw new Error(`Unable to find enemy ${name} listed in the enemy stats.`)
+    throw new Error(`Unable to find enemy ${name} listed in the enemy ability cards.`)
   }
 }
