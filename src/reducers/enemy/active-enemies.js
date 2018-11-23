@@ -1,8 +1,15 @@
-import { ENEMY_ADDED_TO_GAME, ENEMY_REMOVED_FROM_GAME } from '../../consts/actions'
+import { ENEMY_ADDED_TO_GAME, ENEMY_REMOVED_FROM_GAME, ROUND_STARTED } from '../../consts/actions'
 
 export default function activeEnemies(state = [], action) {
   switch (action.type) {
-    case ENEMY_ADDED_TO_GAME:
+    case ROUND_STARTED: {
+      const newState = state.slice()
+
+      newState.sort((a, b) => action.initiatives[a] - action.initiatives[b])
+
+      return newState
+    }
+    case ENEMY_ADDED_TO_GAME: {
       const found = state.some(enemyName => enemyName === action.enemyName)
 
       if (found) {
@@ -10,7 +17,8 @@ export default function activeEnemies(state = [], action) {
       }
 
       return state.concat(action.enemyName)
-    case ENEMY_REMOVED_FROM_GAME:
+    }
+    case ENEMY_REMOVED_FROM_GAME: {
       const newState = []
 
       state.forEach(enemyName => {
@@ -20,6 +28,7 @@ export default function activeEnemies(state = [], action) {
       })
 
       return newState
+    }
     default:
       return state
   }

@@ -1,4 +1,4 @@
-import { END_TURN } from '../../consts/actions'
+import { TURN_ENDED } from '../../consts/actions'
 import { combineReducers } from 'redux'
 import shuffle from '../../utils/shuffle'
 import { AttackModifierTypes } from '../../consts'
@@ -33,7 +33,7 @@ export default combineReducers({
 
 function index(state = 0, action) {
   switch (action.type) {
-    case END_TURN:
+    case TURN_ENDED:
       if (shouldShuffle(action.card)) {
         return 0
       }
@@ -46,7 +46,7 @@ function index(state = 0, action) {
 
 function cards(state = initialCards, action) {
   switch (action.type) {
-    case END_TURN:
+    case TURN_ENDED:
       if (shouldShuffle(action.card)) {
         return shuffle(state)
       }

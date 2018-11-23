@@ -1,11 +1,14 @@
-import { END_TURN } from '../consts/actions'
+import { TURN_ENDED } from '../consts/actions'
+import { getTopCard } from '../selectors/enemy'
 
-/**
- * @param {Object} card The attack modifier card that was drawn for that turn
- */
-export function endTurn(card) {
-  return {
-    card,
-    type: END_TURN
+export function endTurn() {
+  return (dispatch, getState) => {
+    const state = getState()
+    const card = getTopCard(state)
+
+    dispatch({
+      card,
+      type: TURN_ENDED
+    })
   }
 }

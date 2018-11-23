@@ -1,14 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getTopCard } from '../../selectors/enemy'
-import { endTurn } from '../../actions/end-turn'
 import { AttackModifierTypes } from '../../consts'
 
 class AttackModifierDeck extends React.Component {
-  onClick = () => {
-    this.props.endTurn(this.props.card)
+  static propTypes = {
+    card: PropTypes.object.isRequired
   }
-
   getAttackValue() {
     const { card } = this.props
 
@@ -24,8 +23,8 @@ class AttackModifierDeck extends React.Component {
   render() {
     return (
       <div>
+        <h2>Attack Modifier Deck</h2>
         <div>{this.getAttackValue()}</div>
-        <button onClick={this.onClick}>Draw new card</button>
       </div>
     )
   }
@@ -37,7 +36,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { endTurn }
-)(AttackModifierDeck)
+export default connect(mapStateToProps)(AttackModifierDeck)

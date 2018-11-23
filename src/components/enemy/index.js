@@ -5,10 +5,12 @@ import AbilityCard from './ability-card'
 import styles from './index.module.css'
 import { enemyRemovedFromGame } from '../../actions/enemy-removed-from-game'
 import { getEnemy, getAbilityCard } from '../../selectors/enemy'
+import { isRoundStarted } from '../../selectors/round'
 
 class Enemy extends React.Component {
   static propTypes = {
-    enemy: PropTypes.object.isRequired
+    enemy: PropTypes.object.isRequired,
+    isRoundStarted: PropTypes.bool.isRequired
   }
 
   onRemove = () => {
@@ -31,7 +33,7 @@ class Enemy extends React.Component {
   }
 
   render() {
-    const { enemy } = this.props
+    const { enemy, isRoundStarted } = this.props
 
     return (
       <div className={styles.enemy}>
@@ -41,7 +43,7 @@ class Enemy extends React.Component {
         </div>
         <div className={styles.container}>
           {this.renderStats()}
-          <AbilityCard card={this.props.abilityCard} />
+          {isRoundStarted ? <AbilityCard card={this.props.abilityCard} /> : null}
         </div>
       </div>
     )
@@ -51,7 +53,8 @@ class Enemy extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     enemy: getEnemy(state, ownProps.enemyName),
-    abilityCard: getAbilityCard(state, ownProps.enemyName)
+    abilityCard: getAbilityCard(state, ownProps.enemyName),
+    isRoundStarted: isRoundStarted(state)
   }
 }
 export default connect(

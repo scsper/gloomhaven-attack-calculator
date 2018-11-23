@@ -22,3 +22,22 @@ export function getAbilityCard(state, enemyName) {
 
   return deck.cards[deck.index]
 }
+
+export function getInitiativesOfActiveEnemies(state) {
+  const activeEnemyNames = getActiveEnemies(state)
+  const initiatives = {}
+
+  activeEnemyNames.forEach(enemyName => {
+    const initiative = getAbilityCard(state, enemyName).initiative
+    initiatives[enemyName] = initiative
+  })
+
+  return initiatives
+}
+
+export function getAttack(state, enemyName) {
+  const enemy = getEnemy(state, enemyName)
+  const abilityCard = getAbilityCard(state, enemyName)
+}
+
+export function getMovement(state, enemyName) {}

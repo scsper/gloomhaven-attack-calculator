@@ -1,4 +1,4 @@
-import { ENEMY_ADDED_TO_GAME, ROUND_ENDED } from '../../consts/actions'
+import { ENEMY_ADDED_TO_GAME, ROUND_ENDED, LEVEL_CHANGED } from '../../consts/actions'
 import { combineReducers } from 'redux'
 import { getEnemyData, getEnemyAbilityCards } from '../../enemies'
 import shuffle from '../../utils/shuffle'
@@ -26,6 +26,7 @@ export default function enemies(state = {}, action) {
         [action.enemyName]: enemy({}, action)
       }
 
+    case LEVEL_CHANGED:
     case ROUND_ENDED:
       const newState = {}
 
@@ -60,6 +61,7 @@ function type(state = '', action) {
 function health(state = 0, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+    case LEVEL_CHANGED:
       return getEnemyData(action.enemyName, action.level, action.enemyType).health
     default:
       return state
@@ -69,6 +71,7 @@ function health(state = 0, action) {
 function move(state = 0, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+    case LEVEL_CHANGED:
       return getEnemyData(action.enemyName, action.level, action.enemyType).move
     default:
       return state
@@ -78,6 +81,7 @@ function move(state = 0, action) {
 function attack(state = 0, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+    case LEVEL_CHANGED:
       return getEnemyData(action.enemyName, action.level, action.enemyType).attack
     default:
       return state
@@ -87,6 +91,7 @@ function attack(state = 0, action) {
 function range(state = 0, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+    case LEVEL_CHANGED:
       return getEnemyData(action.enemyName, action.level, action.enemyType).range
     default:
       return state
@@ -96,6 +101,7 @@ function range(state = 0, action) {
 function attributes(state = [], action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+    case LEVEL_CHANGED:
       return getEnemyData(action.enemyName, action.level, action.enemyType).attributes
     default:
       return state
