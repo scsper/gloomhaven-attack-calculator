@@ -52,7 +52,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <h1>Gloomhaven Attack Calculator</h1>
+        <div className={styles.fancy}><h1>GLOOMHAVEN Attack Calculator</h1></div>
         <div className={styles.controls}>
           <div>Round: {this.props.roundCount}</div>
           <div>{this.renderLevelSetter()}</div>

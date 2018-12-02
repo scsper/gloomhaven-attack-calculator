@@ -1,7 +1,31 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
+  padding: 20px;
+  background: #2a160f;
+
+
+}
+
+@font-face {
+    src : url('https://fonts.googleapis.com/css?family=Black+Han+Sans');
+}
+
+.fancy {
+  background: linear-gradient( #180b02 0%, #ff3e27 20%);
+  background-attachment: fixed;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #eee2d8;
+
+  font-size: 22px;
+  font-weight: bold;
+    /*font-family: 'Black Han Sans', sans-serif;*/
+}
+
+.fancy h1 {
+    margin: 0;
 }
 
 .controls {
