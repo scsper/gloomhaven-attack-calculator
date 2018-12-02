@@ -1,11 +1,23 @@
 .enemy {
+    border: 1px solid blue;
+    padding: 20px;
+    margin: 20px;
 }
 
 .container {
   display: flex;
 }
 
+.button {
+    background: none;
+    margin: 16px 8px 20px;
+}
+
 .nameContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.stats {
+    margin-top: 24px;
 }

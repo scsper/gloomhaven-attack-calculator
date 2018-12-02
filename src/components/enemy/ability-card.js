@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styles from './ability-card.module.css'
 
 class AbilityCard extends Component {
   static propTypes = {
@@ -9,9 +10,9 @@ class AbilityCard extends Component {
   render() {
     const { card } = this.props
     return (
-      <div>
-        <h2>Ability Card</h2>
-        <h3>Initiative: {card.initiative}</h3>
+      <div className={styles.container}>
+        <h3 className={styles.title}>Ability Card</h3>
+        <p className={styles.initiative}>Initiative: {card.initiative}</p>
         <p>Movement: {card.move}</p>
         <p>Attack: {card.attack}</p>
         <p>Attributes: {card.attributes}</p>

@@ -53,9 +53,9 @@ class Header extends React.Component {
     return (
       <div className={styles.container}>
         <h1>Gloomhaven Attack Calculator</h1>
-        <div>
-          <div>{this.renderLevelSetter()}</div>
+        <div className={styles.controls}>
           <div>Round: {this.props.roundCount}</div>
+          <div>{this.renderLevelSetter()}</div>
           {!this.props.isRoundStarted ? this.renderStartRoundButton() : this.renderEndRoundButtons()}
         </div>
       </div>

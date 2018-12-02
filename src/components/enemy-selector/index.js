@@ -6,6 +6,8 @@ import Trie from '../../platform/trie'
 import { enemyAddedToGame } from '../../actions/enemy-added-to-game'
 import { EnemyTypes } from '../../consts'
 
+import styles from './enemy-selector.module.css'
+
 class EnemySelector extends React.Component {
   constructor() {
     super()
@@ -33,12 +35,12 @@ class EnemySelector extends React.Component {
 
   render() {
     const enemyNames = this.trie.getAllPossibleWordsWithCapitals(this.state.value)
-
+    const listClass = enemyNames.length ? styles['open-list'] : styles['list'];
     return (
-      <div>
-        <h1>Enemy Selector</h1>
+      <div className={styles.container}>
+        <h3 className={styles.title}>Enemy Selector</h3>
         <input placeholder="Search for an enemy..." onChange={this.onChange} value={this.state.value} />
-        <ul>{this.renderEnemyNames(enemyNames)}</ul>
+        <ul className={listClass} >{this.renderEnemyNames(enemyNames)}</ul>
       </div>
     )
   }
@@ -56,7 +58,7 @@ class EnemyName extends React.Component {
   }
 
   render() {
-    return <li onClick={this.onClick}>{this.props.enemyName}</li>
+    return <li className={styles.name} onClick={this.onClick}>{this.props.enemyName}</li>
   }
 }
 
