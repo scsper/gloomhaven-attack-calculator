@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import AbilityCard from './ability-card'
 import styles from './index.module.css'
 import { enemyRemovedFromGame } from '../../actions/enemy-removed-from-game'
-import { getEnemy, getAbilityCard } from '../../selectors/enemy'
+import { getEnemy, getAbilityCard, getAttack, getMovement, getRange } from '../../selectors/enemy'
 import { isRoundStarted } from '../../selectors/round'
 
 class Enemy extends React.Component {
@@ -23,9 +23,9 @@ class Enemy extends React.Component {
     return (
       <div className={styles.stats}>
         <p>Health: {enemy.health}</p>
-        <p>Movement: {enemy.move}</p>
-        <p>Attack: {enemy.attack}</p>
-        <p>Range: {enemy.range}</p>
+        <p>Movement: {this.props.movement}</p>
+        <p>Attack: {this.props.attack}</p>
+        <p>Range: {this.props.range}</p>
         <p>Attributes: {enemy.attributes}</p>
       </div>
     )
@@ -53,7 +53,10 @@ function mapStateToProps(state, ownProps) {
   return {
     enemy: getEnemy(state, ownProps.enemyName),
     abilityCard: getAbilityCard(state, ownProps.enemyName),
-    isRoundStarted: isRoundStarted(state)
+    isRoundStarted: isRoundStarted(state),
+    attack: getAttack(state, ownProps.enemyName),
+    movement: getMovement(state, ownProps.enemyName),
+    range: getRange(state, ownProps.enemyName)
   }
 }
 export default connect(

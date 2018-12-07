@@ -5,7 +5,7 @@
       { "initiative": 14, "reshuffle": false, "attributes": ["Special 2"] },
       { "initiative": 17, "reshuffle": true, "attributes": ["Special 2"] },
       { "initiative": 36, "reshuffle": false, "move": 0, "attack": 0 },
-      { "initiative": 52, "reshuffle": false, "move": -1, "attack": -1, "attributes": ["Range 3", "Target 2"] },
+      { "initiative": 52, "reshuffle": false, "move": -1, "attack": -1, "range": 3, "attributes": ["Target 2"] },
       { "initiative": 73, "reshuffle": false, "attributes": ["Special 1"] },
       { "initiative": 79, "reshuffle": false, "attributes": ["Special 1"] },
       { "initiative": 85, "reshuffle": true, "attributes": ["Special 1"] }

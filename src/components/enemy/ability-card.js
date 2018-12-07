@@ -16,7 +16,6 @@ class AbilityCard extends Component {
         <p>Movement: {card.move}</p>
         <p>Attack: {card.attack}</p>
         <p>Attributes: {card.attributes}</p>
-        <p>Reshuffle: {card.reshuffle}</p>
       </div>
     )
   }

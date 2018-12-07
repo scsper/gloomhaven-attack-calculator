@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { endRound, startRound } from '../../actions/round'
-import { endTurn } from '../../actions/end-turn'
+import { drawEnemyAttackModifierCard } from '../../actions/end-turn'
 import { changeLevel } from '../../actions/change-level'
 import { isRoundStarted, getRoundCount } from '../../selectors/round'
 import styles from './index.module.css'
@@ -11,7 +11,7 @@ import { getLevel } from '../../selectors/level'
 class Header extends React.Component {
   static propTypes = {
     endRound: PropTypes.func.isRequired,
-    endTurn: PropTypes.func.isRequired,
+    drawEnemyAttackModifierCard: PropTypes.func.isRequired,
     startRound: PropTypes.func.isRequired,
     roundCount: PropTypes.number.isRequired,
     isRoundStarted: PropTypes.bool.isRequired
@@ -24,7 +24,7 @@ class Header extends React.Component {
   renderEndRoundButtons() {
     return (
       <React.Fragment>
-        <button onClick={this.props.endTurn}>End Turn</button>
+        <button onClick={this.props.drawEnemyAttackModifierCard}>Draw Card</button>
         <button onClick={this.props.endRound}>End Round</button>
       </React.Fragment>
     )
@@ -36,16 +36,19 @@ class Header extends React.Component {
 
   renderLevelSetter() {
     return (
-      <select value={this.props.level} onChange={this.onLevelChange}>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-      </select>
+      <React.Fragment>
+        <label>Level: </label>
+        <select value={this.props.level} onChange={this.onLevelChange}>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </React.Fragment>
     )
   }
 
@@ -71,5 +74,5 @@ export default connect(
       level: getLevel(state)
     }
   },
-  { changeLevel, endRound, endTurn, startRound }
+  { changeLevel, endRound, drawEnemyAttackModifierCard, startRound }
 )(Header)

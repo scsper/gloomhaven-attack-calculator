@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getTopCard } from '../../selectors/enemy'
+import { getAttackModifierCard } from '../../selectors/enemy'
+import { isRoundStarted } from '../../selectors/round'
 import { AttackModifierTypes } from '../../consts'
 
 class AttackModifierDeck extends React.Component {
@@ -24,7 +25,7 @@ class AttackModifierDeck extends React.Component {
     return (
       <div>
         <h2>Attack Modifier Deck</h2>
-        <div>{this.getAttackValue()}</div>
+        <div>{this.props.isRoundStarted ? this.getAttackValue() : null}</div>
       </div>
     )
   }
@@ -32,7 +33,8 @@ class AttackModifierDeck extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    card: getTopCard(state)
+    card: getAttackModifierCard(state),
+    isRoundStarted: isRoundStarted(state)
   }
 }
 
