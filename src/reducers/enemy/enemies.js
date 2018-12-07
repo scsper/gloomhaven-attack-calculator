@@ -3,7 +3,14 @@ import { combineReducers } from 'redux'
 import { getEnemyData, getEnemyAbilityCards } from '../../enemies'
 import shuffle from '../../utils/shuffle'
 
+let uuid = 1
+
+function assignId() {
+  return uuid++
+}
+
 const enemy = combineReducers({
+  id,
   name,
   type,
   health,
@@ -38,6 +45,14 @@ export default function enemies(state = {}, action) {
     default:
       return state
   }
+}
+
+function id(state = '', action) {
+  if (!state) {
+    return assignId()
+  }
+
+  return state
 }
 
 function name(state = '', action) {
@@ -111,17 +126,22 @@ function attributes(state = [], action) {
 function deck(state = { cards: [], index: 0 }, action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
+      if (action.deck) {
+        return { ...action.deck }
+      }
+
       return {
         cards: shuffle(getEnemyAbilityCards(action.enemyName)),
         index: state.index || 0
       }
 
     case ROUND_ENDED: {
+      const myEnemyName = action.enemyName.split(/\(elite\)/)[0].trim()
       const reshuffle = state.cards[state.index].reshuffle
 
       if (reshuffle) {
         return {
-          cards: shuffle(getEnemyAbilityCards(action.enemyName)),
+          cards: action.deckMap[myEnemyName].cards,
           index: 0
         }
       }
