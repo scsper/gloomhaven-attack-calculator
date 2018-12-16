@@ -35,12 +35,12 @@ class EnemySelector extends React.Component {
 
   render() {
     const enemyNames = this.trie.getAllPossibleWordsWithCapitals(this.state.value)
-    const listClass = enemyNames.length ? styles['open-list'] : styles['list'];
+    const listClass = enemyNames.length ? styles['open-list'] : styles['list']
     return (
       <div className={styles.container}>
         <h3 className={styles.title}>Enemy Selector</h3>
         <input placeholder="Search for an enemy..." onChange={this.onChange} value={this.state.value} />
-        <ul className={listClass} >{this.renderEnemyNames(enemyNames)}</ul>
+        <ul className={listClass}>{this.renderEnemyNames(enemyNames)}</ul>
       </div>
     )
   }
@@ -54,11 +54,15 @@ class EnemyName extends React.Component {
 
   onClick = () => {
     // TODO: Add handling for Elite enemies
-    this.props.onClick(this.props.enemyName, EnemyTypes.NORMAL)
+    this.props.onClick(this.props.enemyName, EnemyTypes.ELITE)
   }
 
   render() {
-    return <li className={styles.name} onClick={this.onClick}>{this.props.enemyName}</li>
+    return (
+      <li className={styles.name} onClick={this.onClick}>
+        {this.props.enemyName}
+      </li>
+    )
   }
 }
 

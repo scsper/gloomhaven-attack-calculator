@@ -102,7 +102,7 @@ function attributes(state = [], action) {
   switch (action.type) {
     case ENEMY_ADDED_TO_GAME:
     case LEVEL_CHANGED:
-      return getEnemyData(action.enemyName, action.level, action.enemyType).attributes
+      return getEnemyData(action.enemyName, action.level, action.enemyType).attributes || state
     default:
       return state
   }
