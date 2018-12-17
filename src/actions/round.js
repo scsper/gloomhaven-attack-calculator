@@ -2,6 +2,7 @@ import { ROUND_STARTED, ROUND_ENDED } from '../consts/actions'
 import { getInitiativesOfActiveEnemies } from '../selectors/enemy'
 import shuffle from '../utils/shuffle'
 import { getEnemyAbilityCards } from '../enemies'
+import { getEnemyName } from '../utils/enemy'
 
 export function roundStarted(initiatives) {
   return {
@@ -17,7 +18,7 @@ export function roundEnded() {
     const deckMap = {}
 
     Object.keys(state.enemy.enemies).forEach(enemyName => {
-      const myEnemyName = enemyName.split(/\(elite\)/)[0].trim()
+      const myEnemyName = getEnemyName(enemyName)
       const deck = { ...state.enemy.enemies[enemyName].deck }
 
       if (deckMap[myEnemyName]) {

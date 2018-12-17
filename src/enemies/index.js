@@ -1,8 +1,6 @@
 import enemyStats from './stats.json'
 import enemyAbilityCards from './ability-cards.json'
-import { EnemyTypes } from '../consts'
-
-const eliteRegex = /\(elite\)/
+import { getEnemyName, getEnemyType } from '../utils/enemy'
 
 const enemyList = [
   ...Object.keys(enemyStats.monsters),
@@ -10,9 +8,9 @@ const enemyList = [
   ...Object.keys(enemyStats.bosses)
 ]
 
-export function getEnemyData(name, level, type = EnemyTypes.NORMAL) {
-  let enemyType = eliteRegex.test(name) ? EnemyTypes.ELITE : EnemyTypes.NORMAL
-  let enemyName = name.split(eliteRegex)[0].trim()
+export function getEnemyData(name, level) {
+  let enemyType = getEnemyType(name)
+  let enemyName = getEnemyName(name)
 
   if (enemyStats.monsters.hasOwnProperty(enemyName)) {
     return enemyStats.monsters[enemyName].level[level][enemyType]
@@ -28,7 +26,7 @@ export function getEnemyList() {
 }
 
 export function getEnemyAbilityCards(name) {
-  let enemyName = name.split(eliteRegex)[0].trim()
+  const enemyName = getEnemyName(name)
 
   if (enemyAbilityCards.monsters[enemyName]) {
     return enemyAbilityCards.monsters[enemyName]

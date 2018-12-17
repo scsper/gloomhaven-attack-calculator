@@ -1,4 +1,4 @@
-import { ENEMY_ATTACK_MODIFIER_CARD_DRAWN } from '../../consts/actions'
+import { ENEMY_ATTACK_MODIFIER_CARD_DRAWN, ROUND_ENDED } from '../../consts/actions'
 import { combineReducers } from 'redux'
 import shuffle from '../../utils/shuffle'
 import { AttackModifierTypes } from '../../consts'
@@ -28,14 +28,15 @@ const initialCards = shuffle([
 
 export default combineReducers({
   index,
-  cards
+  cards,
+  isShown
 })
 
-function index(state = 0, action) {
+function index(state = -1, action) {
   switch (action.type) {
     case ENEMY_ATTACK_MODIFIER_CARD_DRAWN:
       if (shouldShuffle(action.card)) {
-        return 0
+        return -1
       }
 
       return state + 1
@@ -57,7 +58,24 @@ function cards(state = initialCards, action) {
   }
 }
 
+function isShown(state = false, action) {
+  switch (action.type) {
+    case ENEMY_ATTACK_MODIFIER_CARD_DRAWN:
+      return true
+
+    case ROUND_ENDED:
+      return false
+
+    default:
+      return state
+  }
+}
+
 // TODO: Look up reshuffle rules.
 function shouldShuffle(card) {
+  if (!card) {
+    return false
+  }
+
   return card.type === AttackModifierTypes.NULL || card.type === AttackModifierTypes.DOUBLE_DAMAGE
 }

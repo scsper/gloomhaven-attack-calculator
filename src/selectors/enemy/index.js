@@ -5,7 +5,18 @@ export function getAttackModifierCard(state) {
   const { enemy } = state
   const { attackModifierDeck } = enemy
 
+  if (attackModifierDeck.index === -1 || !attackModifierDeck.isShown) {
+    return null
+  }
+
   return attackModifierDeck.cards[attackModifierDeck.index]
+}
+
+export function areAttackModifierCardsShown(state) {
+  const { enemy } = state
+  const { attackModifierDeck } = enemy
+
+  return attackModifierDeck.isShown
 }
 
 export function getLevel(state) {
@@ -53,6 +64,10 @@ export function getAttack(state, enemyName) {
   }
 
   let attack = enemy.attack + abilityCard.attack
+
+  if (!attackModifierCard) {
+    return attack
+  }
 
   if (attackModifierCard.type === AttackModifierTypes.NULL) {
     return '0 (attack modifier card was null)'

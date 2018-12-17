@@ -51,6 +51,53 @@
       },
       { "initiative": 82, "reshuffle": false, "move": -1, "attack": 1 },
       { "initiative": 91, "reshuffle": false, "move": 1, "attributes": ["Living Corpse suffers 1 damage."] }
+    ],
+    "Night Demon": [
+      { "initiative": 4, "reshuffle": false, "move": 1, "attack": -1, "attributes": ["Generates Night element"] },
+      {
+        "initiative": 7,
+        "reshuffle": false,
+        "move": 1,
+        "attack": -1,
+        "attributes": ["Consumes Night element to make Self Invisible"]
+      },
+      {
+        "initiative": 15,
+        "reshuffle": false,
+        "move": 0,
+        "attack": -1,
+        "attributes": [
+          "All adjacent enemies and allies take 1 damage",
+          "Consumes Any element to Generate Night element"
+        ]
+      },
+      { "initiative": 22, "reshuffle": false, "move": 0, "attack": 0, "attributes": ["Generates Night element"] },
+      {
+        "initiative": 26,
+        "reshuffle": false,
+        "attack": -2,
+        "attributes": ["Range 3", "Target 3", "Consumes Night element to Muddle targets"]
+      },
+      {
+        "initiative": 35,
+        "reshuffle": false,
+        "attack": -1,
+        "attributes": ["Pierce 2", "Consumes Sun to Curse Self"]
+      },
+      {
+        "initiative": 41,
+        "reshuffle": true,
+        "move": -1,
+        "attack": 1,
+        "attributes": ["Generates Night element"]
+      },
+      {
+        "initiative": 46,
+        "reshuffle": true,
+        "move": -1,
+        "attack": 1,
+        "attributes": ["Consumes Night to generate +2 Attack"]
+      }
     ]
   }
 }

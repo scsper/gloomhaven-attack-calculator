@@ -2,6 +2,7 @@ import { ENEMY_ADDED_TO_GAME, ROUND_ENDED, LEVEL_CHANGED } from '../../consts/ac
 import { combineReducers } from 'redux'
 import { getEnemyData, getEnemyAbilityCards } from '../../enemies'
 import shuffle from '../../utils/shuffle'
+import { getEnemyName } from '../../utils/enemy'
 
 let uuid = 1
 
@@ -136,7 +137,7 @@ function deck(state = { cards: [], index: 0 }, action) {
       }
 
     case ROUND_ENDED: {
-      const myEnemyName = action.enemyName.split(/\(elite\)/)[0].trim()
+      const myEnemyName = getEnemyName(action.enemyName)
       const reshuffle = state.cards[state.index].reshuffle
 
       if (reshuffle) {
